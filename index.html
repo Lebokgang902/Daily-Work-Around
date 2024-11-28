@@ -123,4 +123,22 @@
                         <label for="task-${index}">${task.heading}</label>
                     </div>
                     <ul>
-                        ${task.points.map(point => `<li>${point}</li>`).join
+                        ${task.points.map(point => `<li>${point}</li>`).join("")}
+                    </ul>
+                </div>
+            `).join("");
+        }
+
+        // Reset all checkboxes
+        function resetChecklist() {
+            document.querySelectorAll("input[type='checkbox']").forEach(checkbox => checkbox.checked = false);
+        }
+
+        // Add reset button functionality
+        document.querySelector("button").addEventListener("click", resetChecklist);
+
+        // Initialize the checklist on page load
+        loadChecklist();
+    </script>
+</body>
+</html>
