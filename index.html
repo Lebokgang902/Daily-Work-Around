@@ -15,15 +15,21 @@
             text-align: center;
             color: #333;
         }
-        .task {
-            margin: 15px 0;
-            display: flex;
-            align-items: center;
+        .task-group {
+            margin: 20px 0;
         }
-        input[type="checkbox"] {
-            margin-right: 10px;
-            width: 20px;
-            height: 20px;
+        .task-heading {
+            font-size: 18px;
+            font-weight: bold;
+            margin-bottom: 10px;
+        }
+        ul {
+            list-style-type: disc;
+            margin: 0 0 20px 30px;
+            padding: 0;
+        }
+        li {
+            margin-bottom: 8px;
         }
         button {
             background-color: #007bff;
@@ -48,54 +54,73 @@
     <button>Reset Checklist</button>
 
     <script>
-        // Define tasks
+        // Define tasks with headings and their points
         const tasks = [
-            `Back Office Computer 
-            - Run the two opera apps as administrator when necessary.
-            - Check Network Connectivity`,
-            `Reception Computers and the Printer
-            - Check POS IBMs if it's working properly.
-            - Check network connectivity.
-            - Check the printer for paper jams or other problems`,
-            `Check the sales laptops and the printer
-            - Check POS IBMs if it's working properly.
-            - Check network connectivity`,
-            `Symphony check in the Bars
-            - Do a mock room inquiry to confirm Symphony is online.
-            - Check if it's pointing to the right address.`,
-            `Duties Manager Machine
-            - Check the GAAP system if the application is working properly.
-            - Check network connectivity.
-            - Check POS IBMs and confirm functionality`,
-            `Kitchen printer
-            - Run a self-test to confirm functionality`,
-            `Check machines in the stores
-            - Check internet connectivity`,
-            `Continuous ping on the access points
-            - Perform a continuous ping on the access points to confirm sound internet connectivity in the rooms`
+            {
+                heading: "Back Office Computer",
+                points: [
+                    "Run the two Opera apps as administrator when necessary.",
+                    "Check Network Connectivity."
+                ]
+            },
+            {
+                heading: "Reception Computers and the Printer",
+                points: [
+                    "Check POS IBMs if they're working properly.",
+                    "Check network connectivity.",
+                    "Check the printer for paper jams or other problems."
+                ]
+            },
+            {
+                heading: "Check the Sales Laptops and the Printer",
+                points: [
+                    "Check POS IBMs if they're working properly.",
+                    "Check network connectivity."
+                ]
+            },
+            {
+                heading: "Symphony Check in the Bars",
+                points: [
+                    "Do a mock room inquiry to confirm Symphony is online.",
+                    "Check if it's pointing to the correct address."
+                ]
+            },
+            {
+                heading: "Duties Manager Machine",
+                points: [
+                    "Check the GAAP system if the application is working properly.",
+                    "Check network connectivity.",
+                    "Check POS IBMs and confirm functionality."
+                ]
+            },
+            {
+                heading: "Kitchen Printer",
+                points: [
+                    "Run a self-test to confirm functionality."
+                ]
+            },
+            {
+                heading: "Check Machines in the Stores",
+                points: [
+                    "Check internet connectivity."
+                ]
+            },
+            {
+                heading: "Continuous Ping on the Access Points",
+                points: [
+                    "Perform a continuous ping on the access points to confirm sound internet connectivity in the rooms."
+                ]
+            }
         ];
 
         // Load tasks into the checklist
         function loadChecklist() {
             const checklist = document.getElementById("checklist");
             checklist.innerHTML = tasks.map((task, index) => `
-                <div class="task">
-                    <input type="checkbox" id="task-${index}" />
-                    <label for="task-${index}">${task}</label>
-                </div>
-            `).join("");
-        }
-
-        // Reset all checkboxes
-        function resetChecklist() {
-            document.querySelectorAll("input[type='checkbox']").forEach(checkbox => checkbox.checked = false);
-        }
-
-        // Add reset button functionality
-        document.querySelector("button").addEventListener("click", resetChecklist);
-
-        // Initialize the checklist on page load
-        loadChecklist();
-    </script>
-</body>
-</html>
+                <div class="task-group">
+                    <div class="task-heading">
+                        <input type="checkbox" id="task-${index}" />
+                        <label for="task-${index}">${task.heading}</label>
+                    </div>
+                    <ul>
+                        ${task.points.map(point => `<li>${point}</li>`).join
