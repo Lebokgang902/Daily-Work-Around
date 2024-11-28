@@ -1,6 +1,7 @@
 <!DOCTYPE html>
 <html>
 <head>
+    <meta charset="UTF-8">
     <title>Daily Checklist</title>
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <style>
@@ -44,43 +45,43 @@
 <body>
     <h1>Daily Checklist</h1>
     <div id="checklist"></div>
-    <button onclick="resetChecklist()">Reset Checklist</button>
+    <button>Reset Checklist</button>
 
     <script>
         // Define tasks
         const tasks = [
-            "Back Office Computer 
-            - Run the two opera apps as administrator when neccessary.
-            - Check Network Connectivity",
-            "Reception Computers and the Printer
-            - Check pos ibms if its working properly
-            - Check network Connectivity
-            - Check printer if it has paper jams or any other problems",
-            "Check the sales laptops and the printer
-            - Check pos ibms if its working properly
-            - Check network connectivity",
-            "Symphony check in the Bars
-            - Do a mock room enquire to confirm symphony is online
-            - Check if it pointing to the right addrress",
-            "Duties Manager Machine
-            - Check the GAAP system if the application is working properly
-            - Check network connectivity
-            - Check pos ibms and confirm propriety ",
-            "kitchen printer
-            - Run self-test to confirm functionlity",
-            "check machines in the stores
-            - Check internet connectivity",
-            "continous ping on the access points
-            - Do a contious ping on the access points to confirm sound internet connectivity in the rooms "
+            `Back Office Computer 
+            - Run the two opera apps as administrator when necessary.
+            - Check Network Connectivity`,
+            `Reception Computers and the Printer
+            - Check POS IBMs if it's working properly.
+            - Check network connectivity.
+            - Check the printer for paper jams or other problems`,
+            `Check the sales laptops and the printer
+            - Check POS IBMs if it's working properly.
+            - Check network connectivity`,
+            `Symphony check in the Bars
+            - Do a mock room inquiry to confirm Symphony is online.
+            - Check if it's pointing to the right address.`,
+            `Duties Manager Machine
+            - Check the GAAP system if the application is working properly.
+            - Check network connectivity.
+            - Check POS IBMs and confirm functionality`,
+            `Kitchen printer
+            - Run a self-test to confirm functionality`,
+            `Check machines in the stores
+            - Check internet connectivity`,
+            `Continuous ping on the access points
+            - Perform a continuous ping on the access points to confirm sound internet connectivity in the rooms`
         ];
 
         // Load tasks into the checklist
         function loadChecklist() {
             const checklist = document.getElementById("checklist");
-            checklist.innerHTML = tasks.map(task => `
+            checklist.innerHTML = tasks.map((task, index) => `
                 <div class="task">
-                    <input type="checkbox" />
-                    <label>${task}</label>
+                    <input type="checkbox" id="task-${index}" />
+                    <label for="task-${index}">${task}</label>
                 </div>
             `).join("");
         }
@@ -89,6 +90,9 @@
         function resetChecklist() {
             document.querySelectorAll("input[type='checkbox']").forEach(checkbox => checkbox.checked = false);
         }
+
+        // Add reset button functionality
+        document.querySelector("button").addEventListener("click", resetChecklist);
 
         // Initialize the checklist on page load
         loadChecklist();
